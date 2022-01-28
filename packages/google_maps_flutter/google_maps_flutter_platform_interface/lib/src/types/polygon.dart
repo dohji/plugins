@@ -33,6 +33,7 @@ class Polygon implements MapsObject {
     this.strokeWidth = 10,
     this.visible = true,
     this.zIndex = 0,
+    this.tag = '',
     this.onTap,
   });
 
@@ -90,6 +91,9 @@ class Polygon implements MapsObject {
   /// earlier, and thus appearing to be closer to the surface of the Earth.
   final int zIndex;
 
+  /// Allows you to categorize the polygon into a group
+  final String tag;
+
   /// Callbacks to receive tap events for polygon placed on this map.
   final VoidCallback? onTap;
 
@@ -105,20 +109,22 @@ class Polygon implements MapsObject {
     int? strokeWidthParam,
     bool? visibleParam,
     int? zIndexParam,
+    String? tagParam,
     VoidCallback? onTapParam,
   }) {
     return Polygon(
-      polygonId: polygonId,
-      consumeTapEvents: consumeTapEventsParam ?? consumeTapEvents,
-      fillColor: fillColorParam ?? fillColor,
-      geodesic: geodesicParam ?? geodesic,
-      points: pointsParam ?? points,
-      holes: holesParam ?? holes,
-      strokeColor: strokeColorParam ?? strokeColor,
-      strokeWidth: strokeWidthParam ?? strokeWidth,
-      visible: visibleParam ?? visible,
-      onTap: onTapParam ?? onTap,
-      zIndex: zIndexParam ?? zIndex,
+        polygonId: polygonId,
+        consumeTapEvents: consumeTapEventsParam ?? consumeTapEvents,
+        fillColor: fillColorParam ?? fillColor,
+        geodesic: geodesicParam ?? geodesic,
+        points: pointsParam ?? points,
+        holes: holesParam ?? holes,
+        strokeColor: strokeColorParam ?? strokeColor,
+        strokeWidth: strokeWidthParam ?? strokeWidth,
+        visible: visibleParam ?? visible,
+        onTap: onTapParam ?? onTap,
+        zIndex: zIndexParam ?? zIndex,
+        tag: tagParam ?? tag
     );
   }
 
@@ -145,6 +151,7 @@ class Polygon implements MapsObject {
     addIfPresent('strokeWidth', strokeWidth);
     addIfPresent('visible', visible);
     addIfPresent('zIndex', zIndex);
+    addIfPresent('tag', tag);
 
     if (points != null) {
       json['points'] = _pointsToJson();
@@ -171,6 +178,7 @@ class Polygon implements MapsObject {
         visible == typedOther.visible &&
         strokeColor == typedOther.strokeColor &&
         strokeWidth == typedOther.strokeWidth &&
+        tag == typedOther.tag &&
         zIndex == typedOther.zIndex;
   }
 

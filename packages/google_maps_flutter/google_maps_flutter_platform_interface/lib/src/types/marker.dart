@@ -146,6 +146,7 @@ class Marker implements MapsObject {
     this.rotation = 0.0,
     this.visible = true,
     this.zIndex = 0.0,
+    this.tag = "",
     this.onTap,
     this.onDrag,
     this.onDragStart,
@@ -206,6 +207,9 @@ class Marker implements MapsObject {
   /// earlier, and thus appearing to be closer to the surface of the Earth.
   final double zIndex;
 
+  /// Allows you to categorize the marker into a group
+  final String tag;
+
   /// Callbacks to receive tap events for markers placed on this map.
   final VoidCallback? onTap;
 
@@ -232,6 +236,7 @@ class Marker implements MapsObject {
     double? rotationParam,
     bool? visibleParam,
     double? zIndexParam,
+    String? tagParam,
     VoidCallback? onTapParam,
     ValueChanged<LatLng>? onDragStartParam,
     ValueChanged<LatLng>? onDragParam,
@@ -250,6 +255,7 @@ class Marker implements MapsObject {
       rotation: rotationParam ?? rotation,
       visible: visibleParam ?? visible,
       zIndex: zIndexParam ?? zIndex,
+      tag: tagParam ?? tag,
       onTap: onTapParam ?? onTap,
       onDragStart: onDragStartParam ?? onDragStart,
       onDrag: onDragParam ?? onDrag,
@@ -282,6 +288,7 @@ class Marker implements MapsObject {
     addIfPresent('rotation', rotation);
     addIfPresent('visible', visible);
     addIfPresent('zIndex', zIndex);
+    addIfPresent('tag', tag);
     return json;
   }
 
@@ -301,6 +308,7 @@ class Marker implements MapsObject {
         position == typedOther.position &&
         rotation == typedOther.rotation &&
         visible == typedOther.visible &&
+        tag == typedOther.tag &&
         zIndex == typedOther.zIndex;
   }
 
@@ -312,7 +320,7 @@ class Marker implements MapsObject {
     return 'Marker{markerId: $markerId, alpha: $alpha, anchor: $anchor, '
         'consumeTapEvents: $consumeTapEvents, draggable: $draggable, flat: $flat, '
         'icon: $icon, infoWindow: $infoWindow, position: $position, rotation: $rotation, '
-        'visible: $visible, zIndex: $zIndex, onTap: $onTap, onDragStart: $onDragStart, '
+        'visible: $visible, zIndex: $zIndex, tag: $tag, onTap: $onTap, onDragStart: $onDragStart, '
         'onDrag: $onDrag, onDragEnd: $onDragEnd}';
   }
 }

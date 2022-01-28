@@ -36,6 +36,7 @@ class Polyline implements MapsObject {
     this.visible = true,
     this.width = 10,
     this.zIndex = 0,
+    this.tag = "",
     this.onTap,
   });
 
@@ -112,6 +113,9 @@ class Polyline implements MapsObject {
   /// earlier, and thus appearing to be closer to the surface of the Earth.
   final int zIndex;
 
+  /// Allows you to categorize the polyline into a group
+  final String tag;
+
   /// Callbacks to receive tap events for polyline placed on this map.
   final VoidCallback? onTap;
 
@@ -129,6 +133,7 @@ class Polyline implements MapsObject {
     bool? visibleParam,
     int? widthParam,
     int? zIndexParam,
+    String? tagParam,
     VoidCallback? onTapParam,
   }) {
     return Polyline(
@@ -145,6 +150,7 @@ class Polyline implements MapsObject {
       width: widthParam ?? width,
       onTap: onTapParam ?? onTap,
       zIndex: zIndexParam ?? zIndex,
+      tag: tagParam ?? tag,
     );
   }
 
@@ -177,6 +183,7 @@ class Polyline implements MapsObject {
     addIfPresent('visible', visible);
     addIfPresent('width', width);
     addIfPresent('zIndex', zIndex);
+    addIfPresent('tag', tag);
 
     if (points != null) {
       json['points'] = _pointsToJson();
@@ -205,6 +212,7 @@ class Polyline implements MapsObject {
         endCap == typedOther.endCap &&
         visible == typedOther.visible &&
         width == typedOther.width &&
+        tag == typedOther.tag &&
         zIndex == typedOther.zIndex;
   }
 
